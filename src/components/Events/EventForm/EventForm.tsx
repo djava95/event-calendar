@@ -84,7 +84,7 @@ const EventForm = ({id = '', title='', description = '', startDate = new Date(),
         <textarea className='description' rows={5} placeholder='Description' value={newDescription} onChange={handleDescriptionChange}></textarea>
       </div>
       <div className='date-and-time'>
-        {(+startDate) < (+today) ? (
+        {!timeValidation(startDate, today) ? (
           <div className='warning'> Warning! You are trying to add event on a past date.</div>
         ): ''}
         <div className="date-container"> 
