@@ -1,0 +1,32 @@
+@import '../../assets/styles/mixins.scss';
+
+.dialogue-main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  padding: 16px;
+  background-color: rgb(254, 228, 228);
+  border: 2px solid rgb(72, 72, 72);
+  border-radius: 12px;
+
+  .dialogue-content {
+    text-align: center;
+    font-size: 18px;
+    font-weight: 500;
+    color: rgb(72, 72, 72);
+  }
+
+  .buttons-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
+
+    .delete, .cancel {
+      @include basicButtonStyle;
+      width: 48px;
+      background-color: white;
+    }
+  }
+}

@@ -1,0 +1,24 @@
+.App {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 48px 12px;
+
+  .main-container {
+    display: flex;
+    padding: 0px 24px;
+    gap: 24px;
+    
+    .calendar-main-container{
+      display: flex;
+      align-items: center;
+    }
+    .week-main-container {
+      display: flex;
+      min-height: 80vh;
+      border-radius: 12px;
+      background-color: white;
+    }
+  } 
+}
+

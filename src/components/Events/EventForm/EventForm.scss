@@ -1,0 +1,189 @@
+@import '../../../assets/styles/mixins.scss';
+
+.event-form-main-container {
+  position: fixed;
+  top : 10%;
+  left : 35%;
+  right: 35%;
+  min-width: 240px;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  gap: 24px;
+  padding:32px 16px;
+  border: 2px solid rgb(101, 101, 101);
+  border-radius: 16px; 
+
+  .title-and-description {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    .title {
+      font-size: 18px;
+      height: 24px;
+      width: 100%;
+      outline: none;
+      border : none;
+      border-bottom: 2px solid rgb(101, 101, 101);     
+    }
+
+    .description {
+      font-family: Arial, Helvetica, sans-serif;
+      width: 100%;
+      border-radius: 8px;
+      resize: none;
+      overflow: visible;
+      outline: none;
+      border: none;
+      background-color: rgb(241, 238, 238);
+      
+    }
+  }
+
+  .date-and-time {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 24px; 
+    padding-top: 24px;
+
+    .warning {
+      position: absolute;
+      top : -16px;
+      left :5%;
+      right :5%;
+      width: auto;
+      padding: 5px;
+      font-size: 12px;
+      text-align: center;
+      background-color: rgb(241, 159, 159);
+      color: rgb(75, 3, 3);
+      border-radius: 6px;
+    }
+
+    .date-container {
+      position: relative;
+      font-weight: 500;  
+      display: flex;
+      gap: 16px; 
+
+      .icon-container{
+        display: flex;
+        cursor: pointer;
+
+        .icon {
+          width: 24px;
+          height : 24px;
+        }
+      } 
+      .datePicker-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        left: 210px;
+        top : -200px;
+        background-color: white;
+        border : 2px solid grey;
+        border-radius: 12px;  
+      }
+      .date{
+        font-size: 16px;
+        font-weight: 400;
+        border-bottom: 2px solid rgb(101, 101, 101);   
+      }  
+    }
+
+    .start-time-container, .end-time-container {
+      display: flex;
+      
+
+      .start-time, .end-time {
+        display: flex;
+        width : 96px;
+        font-weight: 500;
+      }
+      .time-error {
+        margin-left: 16px;
+        padding : 0px 8px;
+        text-align: center;
+        background-color: rgb(225, 162, 162);
+        color : rgb(76, 2, 2);
+        border-radius: 8px;
+
+      }
+
+      .hours, .minutes {
+        font-size: 16px;
+        text-align: right;
+        width: 48px;
+        border: none;
+        outline: none;  
+        border-bottom: 2px solid rgb(101, 101, 101);
+      }
+    }
+  }
+
+  .color-input {
+    display: flex;
+    gap: 16px;
+    font-weight: 500;
+
+    span {
+      display: flex;
+      align-items: center;
+    }
+    
+    .color-options-container {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(24px, 1fr));
+      gap: 4px;
+
+      .color-option {
+        cursor: pointer;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+
+        &.selected {
+          outline: 3px solid rgb(48, 48, 48);
+          outline-offset: -2px;
+        }
+        &:hover {
+          outline: 3px solid rgb(48, 48, 48);
+          outline-offset: -2px;
+        } 
+      }
+    }
+  }
+
+  .buttons-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
+  
+    .save, .cancel {
+      @include basicButtonStyle;
+    }
+
+    .save {
+      color : white;
+      background-color: rgb(62, 202, 144);
+      border-color: rgb(62, 202, 144);
+    }
+    .cancel {
+      &:hover {
+        color : white;
+        background-color: red;
+        border-color: red;
+      }
+      &:active {
+        background-color: rgb(144, 5, 5);
+        border-color: rgb(144, 5, 5);
+      }
+    }
+  }
+}

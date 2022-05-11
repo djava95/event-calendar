@@ -1,0 +1,68 @@
+@import '../../../assets/styles/mixins.scss';
+
+.detailed-event-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  background-color: white;
+  padding: 16px;
+  border: 2px solid rgb(101, 101, 101);
+  border-radius: 16px; 
+
+  .event-info {
+    color: rgb(53, 53, 53);
+    font-weight: 500;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    .title {
+      text-align: center;
+      font-size: 18px;
+      width: auto;
+      word-wrap: normal;
+    }
+
+    .description {
+      text-align: justify;
+      width: 100%;
+      max-width: fit-content;
+      word-wrap: normal;
+    }
+
+    .label-color-container {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      .label-color {
+        width: 21px;
+        height: 21px;
+        border-radius: 50%;
+      }
+    }
+  }
+
+  .buttons-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
+  
+    .edit, .delete, .close {
+      @include basicButtonStyle;
+      width: 48px;
+    }
+
+    .delete {
+      &:hover {
+        color : white;
+        background-color: red;
+        border-color: red;
+      }
+      &:active {
+        background-color: rgb(144, 5, 5);
+        border-color: rgb(144, 5, 5);
+      }
+    }
+  }
+}

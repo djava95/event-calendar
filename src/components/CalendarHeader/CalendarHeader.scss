@@ -1,0 +1,42 @@
+.cal-header-container {
+  display: flex;
+  align-items: center;
+  width: 90%;
+  padding: 12px 0px 10px 0px;
+
+  .month-navigation {
+    display: flex;
+    align-items: center;
+    width: 100%;
+
+    .month {
+      display: flex;
+      flex : 1;
+      justify-content: flex-start;
+      font-size: 14px;
+      font-weight: 500;
+      padding-left: 4px;
+    }
+  
+    .buttons-container {
+      display: flex;
+      flex: 1;
+      gap: 8px;
+      justify-content: flex-end;
+      padding-right: 4px;
+
+      .icon-container {
+        cursor: pointer;
+        border-radius: 50%;
+        padding: 6px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        
+        &:hover {
+          background-color: rgb(245, 245, 245);
+        }
+      }  
+    }
+  } 
+}

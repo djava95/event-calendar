@@ -1,0 +1,39 @@
+.day-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 500;
+  font-size: 12px;
+
+  &.inactive {
+    color: rgb(181, 181, 181);  
+  }
+  
+  .day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    transition: all 0.5s;
+
+    &.today {
+      outline: 2px solid black;
+      outline-offset: -2px;
+    }
+
+    &.selected {
+      background-color: rgb(7, 113, 69);
+      color: white;
+      outline : none;
+    }
+      &:hover {
+      background-color: rgba(105, 163, 125, 0.924);
+      color: white;
+      
+    }
+  }
+}

@@ -1,0 +1,10 @@
+.week {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+
+  .detailed-days-container {
+    display: flex;
+    padding-bottom: 8px;
+  }
+}

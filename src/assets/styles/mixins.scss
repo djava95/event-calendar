@@ -1,0 +1,22 @@
+@mixin basicButtonStyle {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 12px;
+  font-size: 16px;
+  font-weight: 600;
+  color: rgb(72, 72, 72);
+  border: 2px solid rgb(72, 72, 72);
+  border-radius: 12px;  
+
+  &:hover {
+    color : white;
+    background-color: rgb(11, 162, 99);
+    border-color: rgb(11, 162, 99);
+  }
+  &:active {
+    background-color: rgb(5, 75, 46);
+    border-color: rgb(5, 75, 46);
+  }
+}

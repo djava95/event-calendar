@@ -1,0 +1,10 @@
+.arrow {
+  stroke:none;
+  fill-rule:nonzero;
+  fill:rgb(41, 41, 41);
+  fill-opacity: 1;
+  
+  &.left {
+    transform: rotateY(180deg);
+  }
+} 

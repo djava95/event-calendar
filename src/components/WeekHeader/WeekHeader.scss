@@ -1,0 +1,53 @@
+@import '../../assets/styles/mixins.scss';
+
+.week-header-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding:  24px 12px 24px 12px;
+  
+  .week-navigation {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 36px;
+    
+    .month {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      width: 164px;
+      font-size: 20px;
+      font-weight: 500;
+      color : rgb(72, 72, 72);
+    }
+  
+    .buttons-container {
+      display: flex;
+      gap: 36px;
+      align-items: center;
+
+      .switch-today, .create-event {
+        @include basicButtonStyle;
+      }
+      .switch-week-buttons {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+
+        .icon-container {
+          cursor: pointer;
+          border-radius: 50%;
+          padding: 6px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          
+          &:hover {
+            background-color: rgb(245, 245, 245);
+          }   
+        }     
+      }  
+    }
+  } 
+}
