@@ -10,7 +10,6 @@ import { showDate } from '../../../services/helpers/functions';
 import calendar_icon from '../../../assets/calendar-icon.png';
 import './EventForm.scss';
 
-
 const EventForm = ({id = '', title='', description = '', startDate = new Date(), endDate= new Date(), labelColor = '#039BE5', handleClose =()=> {}}) => {
   const dispatch = useDispatch();
   const date = useSelector((state :IRootStore) => state.datePicker.date);
@@ -63,7 +62,6 @@ const EventForm = ({id = '', title='', description = '', startDate = new Date(),
   const eventDescription  = (newDescription? newDescription : 'No description');
   const lblColor = newLabelColor;
   
-
   const timeValidation = (startDate : Date, endDate : Date ) => {
     return (((+endDate)-(+startDate)) <0 )
   }
@@ -72,8 +70,7 @@ const EventForm = ({id = '', title='', description = '', startDate = new Date(),
     if (!timeValidation(startDate, endDate)){
       dispatch(addEvent(id, startDate, endDate, eventTitle, eventDescription, lblColor));
       handleClose();
-    }
-    
+    } 
   }
 
   return (

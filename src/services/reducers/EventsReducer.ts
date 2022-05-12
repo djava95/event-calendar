@@ -1,11 +1,13 @@
-import { ADD_EVENT, DELETE_EVENT, eventI, eventDispatchTypes } from "../actions/EventActionTypes";
+import { GET_EVENTS_DATA, ADD_EVENT, DELETE_EVENT, eventI, eventDispatchTypes } from "../actions/EventActionTypes";
 
-interface DefaultStateI {
+export interface DefaultStateI {
   events : eventI[] 
+  changed : boolean
 }
 
 const defaultState : DefaultStateI = {
-  events : []
+  events : [],
+  changed : false
 } 
 
 const EventsReducer = (state: DefaultStateI = defaultState, action : eventDispatchTypes) => {
@@ -16,20 +18,29 @@ const EventsReducer = (state: DefaultStateI = defaultState, action : eventDispat
     if (existingEventIndex === -1) {
       return { 
         ...state,
-        events : state.events?.concat(newEvent)  
+        events : state.events?.concat(newEvent),
+        changed : true  
       }
     } else {
       const updEvents = [...state.events]
       updEvents[existingEventIndex] = newEvent
       return {
         ...state,
-        events : updEvents
+        events : updEvents,
+        changed : true
       }
     }
     case DELETE_EVENT : 
     return { 
       ...state,
-      events : state.events?.filter(event => event.id !== action.payload)  
+      events : state.events?.filter(event => event.id !== action.payload),
+      changed : true 
+    }
+    case GET_EVENTS_DATA : 
+    return {
+      ...state,
+      events : action.payload,
+      changed : false,
     }
     default : 
       return state

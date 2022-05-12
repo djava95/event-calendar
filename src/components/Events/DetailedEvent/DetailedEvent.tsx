@@ -26,7 +26,6 @@ const DetailedEvent = ({id, title, description, startDate, endDate, labelColor, 
   const handleEdit = () => {
     setEditOpen(prevState => !prevState);
   }
-
   const toggleOpen = () => {
     setDialogueOpen(prevState => !prevState);
   }

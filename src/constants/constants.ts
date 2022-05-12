@@ -3,7 +3,6 @@ export const monthNames : string[] = [
   "August"  , "September", "October", "November", "December"
 ];
 
-
 export const dayNames = [
   {name : 'Mon', number : 1}, 
   {name : 'Tue', number : 2},
@@ -13,7 +12,6 @@ export const dayNames = [
   {name : 'Sat', number : 6}, 
   {name : 'Sun', number : 0} 
 ];
-
 
 export const colors = [
   '#D50000','#E67C73', '#F4511E', '#F6BF26', 

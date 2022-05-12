@@ -16,8 +16,7 @@ const WeekView = () => {
         {week.map(day => <DetailedDay key={day.toString()} date={day}/>)}
       </div>
     </div>
-  )
-  
+  ) 
 }
 
 export default WeekView;

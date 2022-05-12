@@ -4,7 +4,6 @@ import DetailedEvent from '../DetailedEvent/DetailedEvent';
 import Modal from '../../Modal/Modal';
 import './EventPreview.scss';
 
-
 interface propsI {
   id : string,
   title : string,
