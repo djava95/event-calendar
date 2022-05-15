@@ -1,19 +1,43 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { IRootStore } from '../../../services/Store';
 import { addEvent } from '../../../services/actions/EventActions';
+import { setDatePickerMonth } from '../../../services/actions/DatePickerActions';
 import Button from '../../Button/Button';
 import DatePicker from '../../DatePicker/DatePicker';
-import DatepickerHeader from '../../DatePicker/DatePickerHeader';
 import { colors } from '../../../constants/constants';
-import { showDate } from '../../../services/helpers/functions';
+import { showDate } from '../../../services/helpers/helpers';
 import calendar_icon from '../../../assets/calendar-icon.png';
 import './EventForm.scss';
 
-const EventForm = ({id = '', title='', description = '', startDate = new Date(), endDate= new Date(), labelColor = '#039BE5', handleClose =()=> {}}) => {
+interface propsI {
+  id? : string,
+  title? : string,
+  description? : string,
+  startDate : Date,
+  endDate : Date,
+  labelColor? : string,
+  handleClose : () => void
+}
+
+const EventForm = ({id = '', title='', description = '', startDate, endDate, labelColor = '#039BE5', handleClose} : propsI) => {
   const dispatch = useDispatch();
   const date = useSelector((state :IRootStore) => state.datePicker.date);
+  const today = new Date();
+  const timeValidation = (startDate : Date, endDate : Date ) => {
+    return (((+endDate)-(+startDate)) <0 )
+  }
+  
+  const [eventDate, setEventDate] = useState(startDate);
 
+  useEffect (()=>{
+    dispatch(setDatePickerMonth(startDate))
+  },[])
+
+  useEffect (()=>{
+    setEventDate(date);
+  },[date])
+    
   const [newTitle, setNewTitle] = useState(title);
   const handleTitleChange = (e : React.ChangeEvent<HTMLInputElement>) => {
     setNewTitle(e.target.value);  
@@ -25,7 +49,7 @@ const EventForm = ({id = '', title='', description = '', startDate = new Date(),
   } 
 
   const [open, setOpen] = useState(false);
-  const handleOpen = () => {
+  const toggleOpen = () => {
     setOpen(prevState => !prevState);
   }
 
@@ -50,65 +74,58 @@ const EventForm = ({id = '', title='', description = '', startDate = new Date(),
   }
   
   const [newLabelColor, setNewLabelColor] = useState(labelColor);
-  const handleColorChange = (e : React.MouseEvent<HTMLDivElement>) => {
-    setNewLabelColor(e.currentTarget.id)
+  const handleColorChange = (color : string) => {
+    setNewLabelColor(color)
   }
 
-  const today = new Date();
-  id = (id === '') ?  (+today).toString() : id;
-  startDate = new Date(date.getFullYear(), date.getMonth(), date.getDate(), +startHours, +startMinutes);
-  endDate = new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate(), +endHours, +endMinutes)
+  const eventId = (id === '') ? (+today).toString() : id;
+  const eventStartDate = new Date(eventDate.getFullYear(), eventDate.getMonth(), eventDate.getDate(), +startHours, +startMinutes);
+  const eventEndDate = new Date(eventStartDate.getFullYear(), eventStartDate.getMonth(), eventStartDate.getDate(), +endHours, +endMinutes)
   const eventTitle = (newTitle ? newTitle : 'Untitled');
   const eventDescription  = (newDescription? newDescription : 'No description');
   const lblColor = newLabelColor;
   
-  const timeValidation = (startDate : Date, endDate : Date ) => {
-    return (((+endDate)-(+startDate)) <0 )
-  }
-
   const handleSave = () => {
-    if (!timeValidation(startDate, endDate)){
-      dispatch(addEvent(id, startDate, endDate, eventTitle, eventDescription, lblColor));
+    if (!timeValidation(eventStartDate, eventEndDate)){
+      dispatch(addEvent(eventId, eventStartDate, eventEndDate, eventTitle, eventDescription, lblColor));
       handleClose();
     } 
   }
 
   return (
     <div className="event-form-main-container">
-     
       <div className="title-and-description">
-        <input className='title' type='text' placeholder='Title' value={newTitle} onChange={handleTitleChange}></input>
-        <textarea className='description' rows={5} placeholder='Description' value={newDescription} onChange={handleDescriptionChange}></textarea>
+        <input className='title' type='text' placeholder='Title' value={newTitle} onChange={handleTitleChange} />
+        <textarea className='description' rows={5} placeholder='Description' value={newDescription} onChange={handleDescriptionChange} />
       </div>
       <div className='date-and-time'>
-        {!timeValidation(startDate, today) ? (
+        {!timeValidation(eventStartDate, today) ? (
           <div className='warning'> Warning! You are trying to add event on a past date.</div>
         ): ''}
         <div className="date-container"> 
           <span> Date : </span>
-          <div className='date'> {showDate(date)} </div>
+          <div className='date'> {showDate(eventDate)} </div>
           <div className="icon-container">
-            <img className='icon' src={calendar_icon} alt='calendar-icon' onClick={handleOpen}/>
+            <img className='icon' src={calendar_icon} alt='calendar-icon' onClick={toggleOpen}/>
           </div>
           {open ? (
             <div className="datePicker-container"> 
-              <DatepickerHeader />
-              <DatePicker />
+              <DatePicker handleClose = {toggleOpen}/>
             </div>
           ): ''}
         </div>
         <div className="start-time-container">
           <span className='start-time'> Start Time : </span>
-          <input className='hours' type='number' placeholder='HH' value={startHours} onChange={handleStartHoursChange} step='1' min='0' max='23' required={true}></input>
+          <input className='hours' type='number' placeholder='HH' value={startHours} onChange={handleStartHoursChange} step='1' min='0' max='23' required={true} />
           <span>:</span>
-          <input className='minutes' type='number' placeholder='MM' value={startMinutes} onChange={handleStartMinutesChange} step='1' min='0' max='59' required={true}></input>
+          <input className='minutes' type='number' placeholder='MM' value={startMinutes} onChange={handleStartMinutesChange} step='1' min='0' max='59' required={true} />
         </div>  
         <div className="end-time-container">
           <span className="end-time"> End Time : </span>
-          <input className='hours' type='number' placeholder='HH' value={endHours} onChange={handleEndHoursChange} step='1' min='0' max='23' required={true}></input>
+          <input className='hours' type='number' placeholder='HH' value={endHours} onChange={handleEndHoursChange} step='1' min='0' max='23' required={true} />
           <span>:</span>
-          <input className='minutes' type='number' placeholder='MM' value={endMinutes} onChange={handleEndMinutesChange} step='1' min='0' max='59' required={true}></input>
-          {timeValidation(startDate, endDate) ? (
+          <input className='minutes' type='number' placeholder='MM' value={endMinutes} onChange={handleEndMinutesChange} step='1' min='0' max='59' required={true} />
+          {timeValidation(eventStartDate, eventEndDate) ? (
             <div className='time-error'>Invalid value!</div>): '' }
         </div>
       </div>
@@ -116,8 +133,12 @@ const EventForm = ({id = '', title='', description = '', startDate = new Date(),
         <span>Label color :</span>
         <div className='color-options-container'>
           {colors.map(
-            color => <div key={color} id={color} className={`color-option ${color===newLabelColor ? 'selected' : '' }`} 
-            style={{backgroundColor : color}} onClick={handleColorChange}>  </div>
+            color => <div 
+            key={color} 
+            id={color} 
+            className={`color-option ${color===newLabelColor ? 'selected' : '' }`} 
+            style={{backgroundColor : color}} 
+            onClick={() => handleColorChange(color)} />  
           )}
         </div>
       </div>

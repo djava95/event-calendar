@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 import { IRootStore } from '../../services/Store';
 import WeekHeader from '../WeekHeader/WeekHeader';
 import DetailedDay from '../DetailedDay/DetailedDay';
-import { GetWeek } from '../../services/helpers/functions';
+import { GetWeek } from '../../services/helpers/helpers';
 import './WeekView.scss';
 
 const WeekView = () => {

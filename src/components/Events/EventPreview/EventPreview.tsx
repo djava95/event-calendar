@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { showTime } from '../../../services/helpers/functions';
+import { showTime } from '../../../services/helpers/helpers';
 import DetailedEvent from '../DetailedEvent/DetailedEvent';
 import Modal from '../../Modal/Modal';
 import './EventPreview.scss';

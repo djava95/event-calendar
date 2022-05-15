@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { IRootStore } from '../../services/Store';
 import { setMonth } from '../../services/actions/CalendarActions';
-import { sameDay } from '../../services/helpers/functions';
+import { sameDay } from '../../services/helpers/helpers';
 import { dayNames } from "../../constants/constants";
 import EventPreview from '../Events/EventPreview/EventPreview';
 import './DetailedDay.scss';

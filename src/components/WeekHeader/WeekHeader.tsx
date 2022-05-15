@@ -12,6 +12,8 @@ const WeekHeader = () => {
   const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
   const date = useSelector((state :IRootStore) => state.calendar.date);
+  const defaultStartTime = new Date(date.setHours(12)); 
+  const defaultEndTime = new Date(date.setHours(13))
   
   const switchWeek = (m : number) => {
     let updWeek = new Date(date.setDate(date.getDate() + m))
@@ -40,12 +42,12 @@ const WeekHeader = () => {
           <div className='switch-week-buttons'>
             <Button handleClick={() => switchWeek(-7)}>
               <div className='icon-container' title='Previous week'>
-                <ArrowIcon direction={'left'} />
+                <ArrowIcon reverted={true} />
               </div>
             </Button>          
             <Button handleClick={()=>switchWeek(7)}>
               <div className='icon-container' title='Next week'> 
-                <ArrowIcon direction={''} />
+                <ArrowIcon />
               </div>
             </Button>
           </div>   
@@ -55,7 +57,7 @@ const WeekHeader = () => {
         </div>
       </nav>
       {open? (
-        <EventForm handleClose={toggleOpen} />
+        <EventForm startDate={defaultStartTime} endDate={defaultEndTime} handleClose={toggleOpen} />
       )
       : '' }
     </header>

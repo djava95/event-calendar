@@ -1,19 +1,18 @@
-import { useSelector, useDispatch } from 'react-redux';
-import { IRootStore } from '../../services/Store';
-import { setMonth } from '../../services/actions/CalendarActions';
-import { sameDay } from '../../services/helpers/functions';
+import { useDispatch } from 'react-redux';
+import { sameDay } from '../../services/helpers/helpers';
 import './Day.scss';
 
 type PropsI = {
   date : Date,
+  selectedDate : Date, 
+  setMonth : (date : Date)=> any
 }
 
-const Day = ({date}: PropsI) => {
+const Day = ({date, selectedDate, setMonth}: PropsI) => {
   const dispatch = useDispatch();
   const selectDate = (date : Date) => {
     dispatch(setMonth(date));
   } 
-  const selectedDate = useSelector((state :IRootStore) => state.calendar.date);
   const today = new Date();
   const checkToday = sameDay(date, today);
   const selectedDay =  sameDay(date, selectedDate)

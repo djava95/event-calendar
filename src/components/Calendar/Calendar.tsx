@@ -1,13 +1,16 @@
-import {useEffect} from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { IRootStore } from '../../services/Store';
-import { setMonth } from '../../services/actions/CalendarActions';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import Day from '../Day/Day';
 import { dayNames } from '../../constants/constants';
 import './Calendar.scss'
 
-const Calendar = () => { 
-  const days = useSelector((state :IRootStore) => state.calendar.days);
+interface propsI {
+  selectedDate : Date,
+  days : Date[],
+  setMonth : (date : Date) => any
+}
+
+const Calendar = ({selectedDate, days, setMonth}: propsI) => { 
   const dispatch = useDispatch();
   const date = new Date();
 
@@ -21,7 +24,7 @@ const Calendar = () => {
         {dayNames.map(day => <span key={day.name} className='day-name'> {day.name} </span> )}
       </div>
       <div className='days-container'>
-        {days.map(day => <Day key={day.toString()} date={day}/>)} 
+        {days.map(day => <Day key={day.toString()} date={day} selectedDate = {selectedDate} setMonth={setMonth}/>)} 
       </div>
     </div>
   )

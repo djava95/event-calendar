@@ -1,28 +1,18 @@
-import {useEffect} from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { IRootStore } from '../../services/Store';
 import { setDatePickerMonth } from '../../services/actions/DatePickerActions';
-import DatePickerDay from './DatePickerDay';
-import { dayNames } from '../../constants/constants';
-import '../Calendar/Calendar.scss';
+import Calendar from '../Calendar/Calendar';
+import CalendarHeader from '../CalendarHeader/CalendarHeader';
+import './DatePicker.scss';
 
-const DatePicker = () => { 
+const DatePicker = ({handleClose = () => {}}) => { 
   const days = useSelector((state :IRootStore) => state.datePicker.days);
   const date = useSelector((state :IRootStore) => state.datePicker.date);
-  const dispatch = useDispatch();
-  
-  useEffect(()=>{
-    dispatch(setDatePickerMonth(date))
-  },[])
-
+    
   return (
-    <div className='container'>
-      <div className='daynames-container'>
-        {dayNames.map(day => <span key={day.name} className='day-name'> {day.name} </span> )}
-      </div>
-      <div className='days-container'>
-        {days.map(day => <DatePickerDay key={day.toString()} date={day}/>)} 
-      </div>
+    <div className='date-picker'>
+      <CalendarHeader date={date} setMonth ={setDatePickerMonth} showCloseButton={true} handleClose={handleClose} />
+      <Calendar selectedDate={date} days={days} setMonth ={setDatePickerMonth}/>
     </div>
   )
 }

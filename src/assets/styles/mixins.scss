@@ -20,3 +20,13 @@
     border-color: rgb(5, 75, 46);
   }
 }
+
+
+@mixin basicCalendarStyle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  border-radius: 12px;
+}

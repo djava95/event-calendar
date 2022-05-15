@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import { useDispatch } from 'react-redux';
 import { deleteEvent } from '../../../services/actions/EventActions';
-import { showDate, showTime } from '../../../services/helpers/functions';
+import { showDate, showTime } from '../../../services/helpers/helpers';
 import EventForm from '../EventForm/EventForm';
 import Modal from '../../Modal/Modal';
 import ConfirmationDialogue from '../../ConfirmationDialogue/ConfirmationDialogue';

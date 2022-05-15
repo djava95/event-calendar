@@ -1,13 +1,17 @@
-import { useSelector, useDispatch } from 'react-redux';
-import { IRootStore } from '../../services/Store';
-import { setMonth } from '../../services/actions/CalendarActions';
+import { useDispatch } from 'react-redux';
 import Button from '../Button/Button';
 import ArrowIcon from '../ArrowIcon/ArrowIcon';
 import { monthNames } from '../../constants/constants';
 import './CalendarHeader.scss';
 
-const CalendarHeader = () => {
-  const date = useSelector((state :IRootStore) => state.calendar.date);
+interface propsI {
+  showCloseButton : boolean,
+  handleClose : ()=> void,
+  date : Date,
+  setMonth : (date : Date) => any
+}
+
+const CalendarHeader = ({date, setMonth, showCloseButton, handleClose}: propsI) => {
   const dispatch = useDispatch();
   const switchMonth = (m : number) => {
     let updMonth = new Date(date.setMonth(date.getMonth() + m))
@@ -21,15 +25,22 @@ const CalendarHeader = () => {
         <div className='buttons-container'>
           <Button handleClick={() => switchMonth(-1)}>
             <div className='icon-container' title='Previous month'>
-            <ArrowIcon direction={'left'} size={12} />
+              <ArrowIcon reverted={true} size={12} />
             </div>
           </Button>
           <Button handleClick={()=>switchMonth(1)}>
             <div className='icon-container' title='Next month'> 
-            <ArrowIcon direction={''} size={12}/>
+              <ArrowIcon size={12}/>
             </div>
           </Button>
         </div>
+        {showCloseButton ? (
+          <div className="close-button-container">
+            <Button handleClick={handleClose}> 
+              <div className='close' title='close'> &#10006; </div>
+            </Button>
+          </div>
+        ): ''}
       </nav>
     </header>
   )
