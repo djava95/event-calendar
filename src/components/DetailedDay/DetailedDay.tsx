@@ -17,7 +17,7 @@ const DetailedDay = ({date} : PropsI) => {
   }
   const getDayName = () => dayNames.find(day => day.number === date.getDay())?.name;
   const selectedDate = useSelector((state :IRootStore) => state.calendar.date);
-  const events = useSelector((state :IRootStore) => state.events.events);
+  const events = useSelector((state :IRootStore) => state.events?.events);
   const selected =  sameDay(date, selectedDate);
 
   return (

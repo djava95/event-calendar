@@ -12,7 +12,7 @@ function App() {
   const changed = useSelector((state: IRootStore) => state.events.changed);
 
   useEffect(()=> {
-    dispatch(getEventsData())
+    dispatch(getEventsData());
   },[])
 
   useEffect(()=>{

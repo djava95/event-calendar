@@ -14,7 +14,6 @@ export const addEvent = (id: Date | string , startDate: Date, endDate : Date, ti
   })
 }
 
-
 export const deleteEvent = (id : string) => {
   return ({
     type : DELETE_EVENT,
@@ -27,23 +26,21 @@ export const setEventsData = (events : eventI[]) => {
 }
 
 export const getEventsData  = () => {
-  const eventsData = localStorage.getItem('eventsData');
-  if (!eventsData || eventsData.length === 0) {
+  let eventsData : any = localStorage.getItem('eventsData');
+  if (!eventsData) {
     setEventsData([]);
-    console.log(eventsData);
-    
-  } else {
-    const data = JSON.parse(eventsData);
-    let convertedData = data.map((event : any) => { 
-      return {...event, 
-        startDate : new Date(Date.parse(event.startDate)),
-        endDate :  new Date(Date.parse(event.endDate))
-      }
-    })  
-    return {
-      type : GET_EVENTS_DATA,
-      payload : convertedData
+  } 
+  eventsData = localStorage.getItem('eventsData');
+  const data = JSON.parse(eventsData);
+  let convertedData = data.map((event : any) => { 
+    return {...event, 
+    startDate : new Date(Date.parse(event.startDate)),
+    endDate :  new Date(Date.parse(event.endDate))
     }
+  })  
+  return {
+    type : GET_EVENTS_DATA,
+    payload : convertedData
   }
 }
 
